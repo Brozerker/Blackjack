@@ -53,37 +53,39 @@ public:
 			else
 				cout << user.hand[i].character << "  ";
 		}
-
-		cout << "\nWhat do you want to do? (H/S)" << endl;
 	}
 	
 	void update() {
 		if (user.myTurn) {
+			cout << "\nWhat do you want to do? (H/S)" << endl;
 			string input;
 			char choice;
 			//getline(cin, input);
 			cin >> choice;
 			if (choice == 'h') {
 				hit(user);
-				if (user.score > 21)
+				if (user.score > 21) {
 					endGame(false);
+					return;
+				}
 			}
 			if (choice == 's')
 				stand(user);
 		}
 
-		if(dealer.myTurn) {
+		if (dealer.myTurn) {
+			if (dealer.score >= 17)
+				stand(dealer);
 			if (dealer.score < 17)
 				hit(dealer);
 			if (dealer.score > 21)
 				endGame(true);
-			else {
-				stand(dealer);
-				if (dealer.score > user.score)
-					endGame(false);
-				else
-					endGame(true);
-			}
+		}
+		else {
+			if (dealer.score > user.score)
+				endGame(false);
+			else
+				endGame(true);
 		}
 	}
 	
@@ -128,6 +130,7 @@ public:
 	}
 
 	void endGame(bool won) {
+		draw();
 		if (won)
 			cout << "You Win!" << endl;
 		else
