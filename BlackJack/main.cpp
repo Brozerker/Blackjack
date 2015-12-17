@@ -11,6 +11,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Initial draw:" << endl;
 	do {
 		game.draw();
+		game.monteCarlo();
 		game.update();
 	} while (game.isRunning());
 	return 0;
