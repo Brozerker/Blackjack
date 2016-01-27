@@ -10,6 +10,7 @@ struct Card {
 	int value = 0;
 	char character = 'X';
 };
+
 struct Player {
 	bool dealer;
 	bool myTurn;
